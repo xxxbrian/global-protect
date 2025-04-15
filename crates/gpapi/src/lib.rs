@@ -22,19 +22,48 @@ pub const GP_SERVICE_LOCK_FILE: &str = "/var/run/gpservice.lock";
 pub const GP_CALLBACK_PORT_FILENAME: &str = "gpcallback.port";
 
 #[cfg(not(debug_assertions))]
-pub const GP_CLIENT_BINARY: &str = "/usr/bin/gpclient";
+use std::path::PathBuf;
 #[cfg(not(debug_assertions))]
-pub const GP_SERVICE_BINARY: &str = "/usr/bin/gpservice";
-#[cfg(not(debug_assertions))]
-pub const GP_GUI_BINARY: &str = "/usr/bin/gpgui";
-#[cfg(not(debug_assertions))]
-pub const GP_GUI_HELPER_BINARY: &str = "/usr/bin/gpgui-helper";
-#[cfg(not(debug_assertions))]
-pub(crate) const GP_AUTH_BINARY: &str = "/usr/bin/gpauth";
+use which::which;
 
-#[cfg(debug_assertions)]
-pub const GP_CLIENT_BINARY: &str = env!("GP_CLIENT_BINARY");
-#[cfg(debug_assertions)]
-pub const GP_SERVICE_BINARY: &str = env!("GP_SERVICE_BINARY");
-#[cfg(debug_assertions)]
-pub(crate) const GP_AUTH_BINARY: &str = env!("GP_AUTH_BINARY");
+pub fn get_binary_path(binary_name: &str) -> String {
+    #[cfg(debug_assertions)]
+    {
+        match binary_name {
+            "gpclient" => env!("GP_CLIENT_BINARY").to_string(),
+            "gpservice" => env!("GP_SERVICE_BINARY").to_string(),
+            "gpauth" => env!("GP_AUTH_BINARY").to_string(),
+            _ => format!("/usr/bin/{}", binary_name),
+        }
+    }
+
+    #[cfg(not(debug_assertions))]
+    {
+        if let Ok(path) = which(binary_name) {
+            return path.to_string_lossy().into_owned();
+        }
+
+        let default_base = if cfg!(target_os = "macos") {
+            "/opt/homebrew/bin"
+        } else {
+            "/usr/bin"
+        };
+
+        PathBuf::from(default_base)
+            .join(binary_name)
+            .to_string_lossy()
+            .into_owned()
+    }
+}
+
+pub fn get_client_binary() -> String {
+    get_binary_path("gpclient")
+}
+
+pub fn get_service_binary() -> String {
+    get_binary_path("gpservice")
+}
+
+pub fn get_auth_binary() -> String {
+    get_binary_path("gpauth")
+}

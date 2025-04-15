@@ -38,6 +38,7 @@ clap-verbosity-flag = { workspace = true, optional = true }
 
 env_logger = { workspace = true, optional = true }
 log-reload = { version = "0.1", optional = true }
+which = "7.0.3"
 
 [target.'cfg(not(any(target_os="macos", target_os="windows")))'.dependencies]
 gtk = "0.18"

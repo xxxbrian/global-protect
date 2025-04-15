@@ -1619,6 +1619,7 @@ dependencies = [
  "urlencoding",
  "uzers",
  "version-compare",
+ "which",
  "whoami",
 ]
 

@@ -6,7 +6,7 @@ use std::{
 
 use tokio::process::Command;
 
-use crate::GP_SERVICE_BINARY;
+use crate::get_service_binary;
 
 use super::command_traits::CommandExt;
 
@@ -27,7 +27,7 @@ impl Default for ServiceLauncher<'_> {
 impl<'a> ServiceLauncher<'a> {
     pub fn new() -> Self {
         Self {
-            program: GP_SERVICE_BINARY.into(),
+            program: get_service_binary().into(),
             minimized: false,
             env_file: None,
             log_file: None,

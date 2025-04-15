@@ -3,7 +3,7 @@ use std::process::Stdio;
 use anyhow::bail;
 use tokio::process::Command;
 
-use crate::{auth::SamlAuthResult, credential::Credential, GP_AUTH_BINARY};
+use crate::{auth::SamlAuthResult, credential::Credential, get_auth_binary};
 
 use super::command_traits::CommandExt;
 
@@ -113,7 +113,7 @@ impl<'a> SamlAuthLauncher<'a> {
 
     /// Launch the authenticator binary as the current user or SUDO_USER if available.
     pub async fn launch(self) -> anyhow::Result<Credential> {
-        let mut auth_cmd = Command::new(GP_AUTH_BINARY);
+        let mut auth_cmd = Command::new(get_auth_binary());
         auth_cmd.arg(self.server);
 
         if self.gateway {
