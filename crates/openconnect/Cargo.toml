@@ -1,0 +1,14 @@
+[package]
+name = "openconnect"
+rust-version.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+links = "openconnect"
+
+[dependencies]
+common = { path = "../common" }
+log.workspace = true
+
+[build-dependencies]
+cc = "1"
