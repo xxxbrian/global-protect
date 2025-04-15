@@ -176,7 +176,7 @@ checksum = "1505bd5d3d116872e7271a6d4e16d81d0c8570876c8de68093a09ac269d8aac0"
 
 [[package]]
 name = "auth"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "block2 0.6.0",
@@ -615,7 +615,7 @@ dependencies = [
 
 [[package]]
 name = "common"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "is_executable",
 ]
@@ -1587,7 +1587,7 @@ dependencies = [
 
 [[package]]
 name = "gpapi"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -1625,7 +1625,7 @@ dependencies = [
 
 [[package]]
 name = "gpauth"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "auth",
@@ -1643,7 +1643,7 @@ dependencies = [
 
 [[package]]
 name = "gpclient"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "clap",
@@ -1665,7 +1665,7 @@ dependencies = [
 
 [[package]]
 name = "gpservice"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "axum",
@@ -2939,7 +2939,7 @@ dependencies = [
 
 [[package]]
 name = "openconnect"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "cc",
  "common",
